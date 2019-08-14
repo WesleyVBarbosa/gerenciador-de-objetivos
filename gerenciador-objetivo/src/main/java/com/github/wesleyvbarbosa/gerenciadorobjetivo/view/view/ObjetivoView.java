@@ -1,12 +1,11 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view;
 
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.CamposNaoPreenchidosException;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
+
+import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Stream;
 
 public class ObjetivoView {
 
@@ -21,18 +20,42 @@ public class ObjetivoView {
     @Deprecated
     public ObjetivoView() {
     }
-    
-    private void validaSeCamposObrigatoriosEstaoPreenchidos() {
-        boolean todosOsCamposPreenchidos = Stream.of(titulo,
-                                                     descricao,
-                                                     percentualConclusao,
-                                                     envolvimento,
-                                                     necessidade,
-                                                     urgencia)
-            .allMatch(Objects::nonNull);
 
-        if (!todosOsCamposPreenchidos) {
-            throw new CamposNaoPreenchidosException();
-        }
+    public ObjetivoView(Objetivo objetivo) {
+        this.titulo = objetivo.getTitulo();
+        this.descricao = objetivo.getDescricao();
+        this.objetivos = objetivo.getObjetivos();
+        this.percentualConclusao = objetivo.getPercentualConclusao();
+        this.envolvimento = objetivo.getEnvolvimento();
+        this.necessidade = objetivo.getNecessidade();
+        this.urgencia = objetivo.getUrgencia();
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public List<Objetivo> getObjetivos() {
+        return objetivos;
+    }
+
+    public BigDecimal getPercentualConclusao() {
+        return percentualConclusao;
+    }
+
+    public BigDecimal getEnvolvimento() {
+        return envolvimento;
+    }
+
+    public BigDecimal getNecessidade() {
+        return necessidade;
+    }
+
+    public BigDecimal getUrgencia() {
+        return urgencia;
     }
 }

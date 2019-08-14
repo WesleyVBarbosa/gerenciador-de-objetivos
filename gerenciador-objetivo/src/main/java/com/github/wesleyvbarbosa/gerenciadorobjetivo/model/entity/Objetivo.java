@@ -2,6 +2,7 @@ package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -12,6 +13,8 @@ import javax.persistence.OneToOne;
 
 @Entity
 public class Objetivo {
+
+    private static final BigDecimal NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE = new BigDecimal(4);
 
     @Id
     @GeneratedValue
@@ -28,6 +31,7 @@ public class Objetivo {
 
     @OneToMany
     private List<Evidencia> evidencias;
+
     private BigDecimal percentualConclusao;
     private BigDecimal envolvimento;
     private BigDecimal necessidade;
@@ -56,12 +60,16 @@ public class Objetivo {
         this.urgencia = urgencia;
     }
 
-    private void calcularPrioridade() {
-
+    public BigDecimal calcularPrioridade() {
+        return getPercentualConclusao()
+            .add(getEnvolvimento())
+            .add(getNecessidade())
+            .add(getUrgencia())
+            .divide(NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE);
     }
 
-    private void alterarStatus() {
-
+    public void alterarStatus(StatusEnum novoStatus) {
+        this.statusEnum = novoStatus;
     }
 
     public void setTitulo(String titulo) {
@@ -109,7 +117,7 @@ public class Objetivo {
     }
 
     public List<Objetivo> getObjetivos() {
-        return objetivos;
+        return Collections.unmodifiableList(objetivos);
     }
 
     public StatusEnum getStatusEnum() {
@@ -133,7 +141,7 @@ public class Objetivo {
     }
 
     public List<Evidencia> getEvidencias() {
-        return evidencias;
+        return Collections.unmodifiableList(evidencias);
     }
 
     public void setEvidencias(List<Evidencia> evidencias) {

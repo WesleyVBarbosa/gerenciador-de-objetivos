@@ -12,6 +12,7 @@ public class Evidencia {
     @Id
     @GeneratedValue
     private int id;
+
     private String descricao;
     private File arquivo;
 

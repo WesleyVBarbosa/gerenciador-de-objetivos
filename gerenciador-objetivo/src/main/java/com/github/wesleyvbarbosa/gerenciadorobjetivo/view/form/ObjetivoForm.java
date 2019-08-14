@@ -51,55 +51,27 @@ public class ObjetivoForm {
         return titulo;
     }
 
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
     public String getDescricao() {
         return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
     }
 
     public List<Objetivo> getObjetivos() {
         return objetivos;
     }
 
-    public void setObjetivos(List<Objetivo> objetivos) {
-        this.objetivos = objetivos;
-    }
-
     public BigDecimal getPercentualConclusao() {
         return percentualConclusao;
-    }
-
-    public void setPercentualConclusao(BigDecimal percentualConclusao) {
-        this.percentualConclusao = percentualConclusao;
     }
 
     public BigDecimal getEnvolvimento() {
         return envolvimento;
     }
 
-    public void setEnvolvimento(BigDecimal envolvimento) {
-        this.envolvimento = envolvimento;
-    }
-
     public BigDecimal getNecessidade() {
         return necessidade;
     }
 
-    public void setNecessidade(BigDecimal necessidade) {
-        this.necessidade = necessidade;
-    }
-
     public BigDecimal getUrgencia() {
         return urgencia;
-    }
-
-    public void setUrgencia(BigDecimal urgencia) {
-        this.urgencia = urgencia;
     }
 }

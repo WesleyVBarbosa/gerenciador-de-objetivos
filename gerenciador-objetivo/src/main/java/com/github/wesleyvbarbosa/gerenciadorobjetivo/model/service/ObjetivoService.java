@@ -63,9 +63,8 @@ public class ObjetivoService {
     }
 
     @Transactional
-    public void deletar(ObjetivoForm form) {
-        Objetivo objetivo = form.converter();
-        repository.delete(objetivo);
+    public void deletar(int id) {
+        repository.deleteById(id);
     }
 
     @Transactional

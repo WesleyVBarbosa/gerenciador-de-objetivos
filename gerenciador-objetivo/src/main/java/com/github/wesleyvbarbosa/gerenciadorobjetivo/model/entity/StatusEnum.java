@@ -10,10 +10,10 @@ public enum StatusEnum {
     EM_ANDAMENTO(2, "em andamento"),
     DESCONTINUADO(3, "descontinuado");
 
-
-    private String descricao;
     @Id
     private int id;
+
+    private String descricao;
 
     StatusEnum(int id, String descricao) {
         this.id = id;
