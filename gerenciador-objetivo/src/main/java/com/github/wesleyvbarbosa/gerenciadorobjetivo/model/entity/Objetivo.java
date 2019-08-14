@@ -1,7 +1,7 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
-import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -22,14 +22,39 @@ public class Objetivo {
 
     @OneToMany
     private List<Objetivo> objetivos;
+
     @OneToOne
     private StatusEnum statusEnum;
+
     @OneToMany
     private List<Evidencia> evidencias;
     private BigDecimal percentualConclusao;
     private BigDecimal envolvimento;
     private BigDecimal necessidade;
     private BigDecimal urgencia;
+
+    @Deprecated
+    public Objetivo() {
+    }
+
+    public Objetivo(String titulo,
+                    String descricao,
+                    List<Objetivo> objetivos,
+                    BigDecimal percentualConclusao,
+                    BigDecimal envolvimento,
+                    BigDecimal necessidade,
+                    BigDecimal urgencia) {
+
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.objetivos = objetivos;
+        this.statusEnum = StatusEnum.EM_ANDAMENTO;
+        this.evidencias = new ArrayList<>();
+        this.percentualConclusao = percentualConclusao;
+        this.envolvimento = envolvimento;
+        this.necessidade = necessidade;
+        this.urgencia = urgencia;
+    }
 
     private void calcularPrioridade() {
 

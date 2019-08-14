@@ -23,4 +23,8 @@ public enum StatusEnum {
     public String getDescricao() {
         return descricao;
     }
+
+    public int getId() {
+        return id;
+    }
 }
