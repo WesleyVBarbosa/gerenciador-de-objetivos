@@ -1,30 +1,18 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-
-@Entity
 public enum StatusEnum {
 
-    CONCLUIDO(1, "concluido"),
-    EM_ANDAMENTO(2, "em andamento"),
-    DESCONTINUADO(3, "descontinuado");
-
-    @Id
-    private int id;
+    CONCLUIDO("concluido"),
+    EM_ANDAMENTO( "em andamento"),
+    DESCONTINUADO( "descontinuado");
 
     private String descricao;
 
-    StatusEnum(int id, String descricao) {
-        this.id = id;
+    StatusEnum(String descricao) {
         this.descricao = descricao;
     }
 
     public String getDescricao() {
         return descricao;
-    }
-
-    public int getId() {
-        return id;
     }
 }

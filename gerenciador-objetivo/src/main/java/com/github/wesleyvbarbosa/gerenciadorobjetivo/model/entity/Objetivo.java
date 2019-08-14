@@ -1,14 +1,14 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
 import java.math.BigDecimal;
-import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Objetivo {
@@ -25,8 +25,8 @@ public class Objetivo {
     @OneToMany
     private List<Objetivo> objetivos;
 
-    @OneToOne
-    private StatusEnum statusEnum;
+    @Enumerated(value = EnumType.STRING)
+    private StatusEnum status;
 
     // TODO lista de evidencias
 
@@ -50,7 +50,7 @@ public class Objetivo {
         this.titulo = titulo;
         this.descricao = descricao;
         this.objetivos = objetivos;
-        this.statusEnum = StatusEnum.EM_ANDAMENTO;
+        this.status = StatusEnum.EM_ANDAMENTO;
         // TODO lista de evidencias
         this.percentualConclusao = percentualConclusao;
         this.envolvimento = envolvimento;
@@ -67,7 +67,7 @@ public class Objetivo {
     }
 
     public void alterarStatus(StatusEnum novoStatus) {
-        this.statusEnum = novoStatus;
+        this.status = novoStatus;
     }
 
     public void setTitulo(String titulo) {
@@ -80,10 +80,6 @@ public class Objetivo {
 
     public void setObjetivos(List<Objetivo> objetivos) {
         this.objetivos = objetivos;
-    }
-
-    public void setStatusEnum(StatusEnum statusEnum) {
-        this.statusEnum = statusEnum;
     }
 
     public void setPercentualConclusao(BigDecimal percentualConclusao) {
@@ -102,6 +98,18 @@ public class Objetivo {
         this.urgencia = urgencia;
     }
 
+    public void setStatus(StatusEnum status) {
+        this.status = status;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
     public int getId() {
         return id;
     }
@@ -115,11 +123,7 @@ public class Objetivo {
     }
 
     public List<Objetivo> getObjetivos() {
-        return Collections.unmodifiableList(objetivos);
-    }
-
-    public StatusEnum getStatusEnum() {
-        return statusEnum;
+        return objetivos;
     }
 
     public BigDecimal getPercentualConclusao() {

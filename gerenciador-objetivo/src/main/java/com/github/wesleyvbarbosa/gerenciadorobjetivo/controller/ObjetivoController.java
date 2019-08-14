@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,37 +29,37 @@ public class ObjetivoController {
         this.service = service;
     }
 
-    @GetMapping(path = "/consultarTodos")
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     public List<ObjetivoView> consultarTodos() {
         return service.buscar();
     }
 
-    @GetMapping(path = "/consultar")
+    @GetMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.OK)
-    public ObjetivoView consultar(@RequestBody int id) {
+    public ObjetivoView consultar(@PathVariable int id) {
         return service.buscar(id);
     }
 
-    @PostMapping(path = "/salvar")
+    @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ObjetivoView salvar(@RequestBody ObjetivoForm form) {
         return service.salvar(form);
     }
 
-    @PostMapping(path = "/alterar")
+    @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void alterar(@RequestBody ObjetivoForm form) {
-        service.alterar(form);
+    public void alterar(@RequestBody ObjetivoForm form, @PathVariable int id) {
+        service.alterar(form, id);
     }
 
     @DeleteMapping(path = "/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ResponseStatus(HttpStatus.OK)
     public void deletar(@PathVariable int id) {
         service.deletar(id);
     }
 
-    @PostMapping(path = "/deletarEmLote")
+    @DeleteMapping
     @ResponseStatus(HttpStatus.OK)
     public void deletarEmLote(@RequestBody List<ObjetivoForm> form) {
         service.deletar(form);

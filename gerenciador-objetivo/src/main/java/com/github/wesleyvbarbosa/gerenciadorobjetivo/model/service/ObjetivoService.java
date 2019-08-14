@@ -57,8 +57,9 @@ public class ObjetivoService {
     }
 
     @Transactional
-    public void alterar(ObjetivoForm form) {
+    public void alterar(ObjetivoForm form, int id) {
         Objetivo objetivo = form.converter();
+        objetivo.setId(id);
         repository.save(objetivo);
     }
 
