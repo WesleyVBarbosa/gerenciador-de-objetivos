@@ -58,10 +58,9 @@ public class ObjetivoController {
         service.deletar(id);
     }
 
-    @PostMapping(path = "/deletarTodos")
+    @PostMapping(path = "/deletarEmLote")
     @ResponseStatus(HttpStatus.OK)
-    public void deletarTodos(@RequestBody List<ObjetivoForm> objetivosForm) {
-        service.deletar(objetivosForm);
+    public void deletarEmLote(@RequestBody List<ObjetivoForm> form) {
+        service.deletar(form);
     }
-
 }

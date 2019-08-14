@@ -2,8 +2,6 @@ package com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
 
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.List;
 

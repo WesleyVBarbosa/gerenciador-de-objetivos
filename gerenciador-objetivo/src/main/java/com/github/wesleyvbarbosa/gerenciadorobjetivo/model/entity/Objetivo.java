@@ -1,7 +1,6 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -29,8 +28,7 @@ public class Objetivo {
     @OneToOne
     private StatusEnum statusEnum;
 
-    @OneToMany
-    private List<Evidencia> evidencias;
+    // TODO lista de evidencias
 
     private BigDecimal percentualConclusao;
     private BigDecimal envolvimento;
@@ -53,7 +51,7 @@ public class Objetivo {
         this.descricao = descricao;
         this.objetivos = objetivos;
         this.statusEnum = StatusEnum.EM_ANDAMENTO;
-        this.evidencias = new ArrayList<>();
+        // TODO lista de evidencias
         this.percentualConclusao = percentualConclusao;
         this.envolvimento = envolvimento;
         this.necessidade = necessidade;
@@ -138,13 +136,5 @@ public class Objetivo {
 
     public BigDecimal getUrgencia() {
         return urgencia;
-    }
-
-    public List<Evidencia> getEvidencias() {
-        return Collections.unmodifiableList(evidencias);
-    }
-
-    public void setEvidencias(List<Evidencia> evidencias) {
-        this.evidencias = evidencias;
     }
 }
