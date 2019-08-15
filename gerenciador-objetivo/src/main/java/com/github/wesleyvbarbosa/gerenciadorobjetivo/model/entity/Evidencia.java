@@ -1,10 +1,10 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
-import java.io.File;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Evidencia {
@@ -12,26 +12,31 @@ public class Evidencia {
     @Id
     @GeneratedValue
     private int id;
-    private String descricao;
-    private File arquivo;
+
+    @ManyToOne
+    @JoinColumn(name = "objetivo_id")
+    private Objetivo objetivo;
+
+    private String caminhoImagem;
+
+    @Deprecated
+    public Evidencia() {
+    }
+
+    public Evidencia(Objetivo objetivo, String caminhoImagem) {
+        this.objetivo = objetivo;
+        this.caminhoImagem = caminhoImagem;
+    }
+
+    public Objetivo getObjetivo() {
+        return objetivo;
+    }
 
     public int getId() {
         return id;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public File getArquivo() {
-        return arquivo;
-    }
-
-    public void setArquivo(File arquivo) {
-        this.arquivo = arquivo;
+    public String getCaminhoImagem() {
+        return caminhoImagem;
     }
 }

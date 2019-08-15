@@ -1,17 +1,21 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
-import java.io.File;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 
 @Entity
 public class Objetivo {
+
+    private static final BigDecimal NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE = new BigDecimal(4);
 
     @Id
     @GeneratedValue
@@ -22,21 +26,55 @@ public class Objetivo {
 
     @OneToMany
     private List<Objetivo> objetivos;
-    @OneToOne
-    private StatusEnum statusEnum;
-    @OneToMany
+
+    @Enumerated(value = EnumType.STRING)
+    private StatusEnum status;
+
+    @OneToMany(mappedBy = "objetivo")
     private List<Evidencia> evidencias;
+
     private BigDecimal percentualConclusao;
     private BigDecimal envolvimento;
     private BigDecimal necessidade;
     private BigDecimal urgencia;
 
-    private void calcularPrioridade() {
-
+    @Deprecated
+    public Objetivo() {
     }
 
-    private void alterarStatus() {
+    public Objetivo(String titulo,
+                    String descricao,
+                    List<Objetivo> objetivos,
+                    BigDecimal percentualConclusao,
+                    BigDecimal envolvimento,
+                    BigDecimal necessidade,
+                    BigDecimal urgencia) {
 
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.objetivos = objetivos;
+        this.status = StatusEnum.EM_ANDAMENTO;
+        this.evidencias = new ArrayList<>();
+        this.percentualConclusao = percentualConclusao;
+        this.envolvimento = envolvimento;
+        this.necessidade = necessidade;
+        this.urgencia = urgencia;
+    }
+
+    public BigDecimal calcularPrioridade() {
+        return getPercentualConclusao()
+            .add(getEnvolvimento())
+            .add(getNecessidade())
+            .add(getUrgencia())
+            .divide(NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE);
+    }
+
+    public void addEvidencia(Evidencia evidencia) {
+        this.evidencias.add(evidencia);
+    }
+
+    public void alterarStatus(StatusEnum novoStatus) {
+        this.status = novoStatus;
     }
 
     public void setTitulo(String titulo) {
@@ -45,14 +83,6 @@ public class Objetivo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public void setObjetivos(List<Objetivo> objetivos) {
-        this.objetivos = objetivos;
-    }
-
-    public void setStatusEnum(StatusEnum statusEnum) {
-        this.statusEnum = statusEnum;
     }
 
     public void setPercentualConclusao(BigDecimal percentualConclusao) {
@@ -71,6 +101,18 @@ public class Objetivo {
         this.urgencia = urgencia;
     }
 
+    public List<Evidencia> getEvidencias() {
+        return Collections.unmodifiableList(evidencias);
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
+    }
+
     public int getId() {
         return id;
     }
@@ -87,10 +129,6 @@ public class Objetivo {
         return objetivos;
     }
 
-    public StatusEnum getStatusEnum() {
-        return statusEnum;
-    }
-
     public BigDecimal getPercentualConclusao() {
         return percentualConclusao;
     }
@@ -105,13 +143,5 @@ public class Objetivo {
 
     public BigDecimal getUrgencia() {
         return urgencia;
-    }
-
-    public List<Evidencia> getEvidencias() {
-        return evidencias;
-    }
-
-    public void setEvidencias(List<Evidencia> evidencias) {
-        this.evidencias = evidencias;
     }
 }
