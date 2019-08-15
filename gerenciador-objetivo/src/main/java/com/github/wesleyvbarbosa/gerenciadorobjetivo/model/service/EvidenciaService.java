@@ -44,7 +44,10 @@ public class EvidenciaService {
 
     @Transactional
     public void salvarEvidencia(List<MultipartFile> arquivos, int id) {
-        File pasta = new File("/imagensRecebidas");
+        File pasta = new File("/imagensRecebidas"); // TODO Colocar o pathname no application.properties
+
+        pasta.mkdirs();
+
         Optional<Objetivo> objetivoRecebido = objetivoRepository.findById(id);
         validacaoPossuiObjetivo(objetivoRecebido.isPresent());
         Objetivo objetivo = objetivoRecebido.get();
