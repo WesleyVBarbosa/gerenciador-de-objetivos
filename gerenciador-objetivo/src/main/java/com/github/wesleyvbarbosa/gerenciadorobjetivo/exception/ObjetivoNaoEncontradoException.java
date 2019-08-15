@@ -13,4 +13,9 @@ public class ObjetivoNaoEncontradoException extends BusinessException {
     public ObjetivoNaoEncontradoException(Throwable cause) {
         super(cause);
     }
+
+    public ObjetivoNaoEncontradoException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }

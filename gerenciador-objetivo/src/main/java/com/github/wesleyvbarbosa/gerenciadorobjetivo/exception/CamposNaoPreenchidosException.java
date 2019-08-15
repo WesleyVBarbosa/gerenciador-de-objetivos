@@ -13,4 +13,9 @@ public class CamposNaoPreenchidosException extends BusinessException {
     public CamposNaoPreenchidosException(Throwable cause) {
         super(cause);
     }
+
+    public CamposNaoPreenchidosException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
 }
