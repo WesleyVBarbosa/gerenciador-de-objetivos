@@ -1,6 +1,8 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -28,7 +30,8 @@ public class Objetivo {
     @Enumerated(value = EnumType.STRING)
     private StatusEnum status;
 
-    // TODO lista de evidencias
+    @OneToMany(mappedBy = "objetivo")
+    private List<Evidencia> evidencias;
 
     private BigDecimal percentualConclusao;
     private BigDecimal envolvimento;
@@ -51,7 +54,7 @@ public class Objetivo {
         this.descricao = descricao;
         this.objetivos = objetivos;
         this.status = StatusEnum.EM_ANDAMENTO;
-        // TODO lista de evidencias
+        this.evidencias = new ArrayList<>();
         this.percentualConclusao = percentualConclusao;
         this.envolvimento = envolvimento;
         this.necessidade = necessidade;
@@ -66,6 +69,10 @@ public class Objetivo {
             .divide(NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE);
     }
 
+    public void addEvidencia(Evidencia evidencia) {
+        this.evidencias.add(evidencia);
+    }
+
     public void alterarStatus(StatusEnum novoStatus) {
         this.status = novoStatus;
     }
@@ -76,10 +83,6 @@ public class Objetivo {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public void setObjetivos(List<Objetivo> objetivos) {
-        this.objetivos = objetivos;
     }
 
     public void setPercentualConclusao(BigDecimal percentualConclusao) {
@@ -98,8 +101,8 @@ public class Objetivo {
         this.urgencia = urgencia;
     }
 
-    public void setStatus(StatusEnum status) {
-        this.status = status;
+    public List<Evidencia> getEvidencias() {
+        return Collections.unmodifiableList(evidencias);
     }
 
     public void setId(int id) {

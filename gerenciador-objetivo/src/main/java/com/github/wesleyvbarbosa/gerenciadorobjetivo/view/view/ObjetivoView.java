@@ -7,6 +7,7 @@ import java.util.List;
 
 public class ObjetivoView {
 
+    private int id;
     private String titulo;
     private String descricao;
     private List<Objetivo> objetivos;
@@ -27,6 +28,11 @@ public class ObjetivoView {
         this.envolvimento = objetivo.getEnvolvimento();
         this.necessidade = objetivo.getNecessidade();
         this.urgencia = objetivo.getUrgencia();
+        this.id = objetivo.getId();
+    }
+
+    public int getId() {
+        return id;
     }
 
     public String getTitulo() {
