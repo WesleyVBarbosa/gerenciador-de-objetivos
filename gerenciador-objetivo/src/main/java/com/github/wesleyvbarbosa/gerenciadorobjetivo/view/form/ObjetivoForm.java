@@ -2,6 +2,7 @@ package com.github.wesleyvbarbosa.gerenciadorobjetivo.view.form;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.CamposNaoPreenchidosException;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.StatusEnum;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,6 +18,7 @@ public class ObjetivoForm {
     private BigDecimal envolvimento;
     private BigDecimal necessidade;
     private BigDecimal urgencia;
+    private StatusEnum status;
 
     @Deprecated
     public ObjetivoForm() {
@@ -45,6 +47,10 @@ public class ObjetivoForm {
         if (!todosOsCamposPreenchidos) {
             throw new CamposNaoPreenchidosException();
         }
+    }
+
+    public StatusEnum getStatus() {
+        return status;
     }
 
     public String getTitulo() {

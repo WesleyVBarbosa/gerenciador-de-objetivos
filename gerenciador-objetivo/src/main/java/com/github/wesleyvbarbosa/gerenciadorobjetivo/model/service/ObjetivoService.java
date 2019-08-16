@@ -2,6 +2,7 @@ package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.service;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.ObjetivoNaoEncontradoException;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.StatusEnum;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.repository.ObjetivoRepository;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.form.ObjetivoForm;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view.ObjetivoView;
@@ -40,17 +41,13 @@ public class ObjetivoService {
     }
 
     public ObjetivoView buscar(int id) {
-        Optional<Objetivo> objetivo = repository.findById(id);
-
-        validacaoPossuiObjetivo(objetivo.isPresent());
-
-        return new ObjetivoView(objetivo.get());
+        Objetivo objetivo = buscaObjetivoValidado(id);
+        return new ObjetivoView(objetivo);
     }
 
     @Transactional
     public ObjetivoView salvar(ObjetivoForm form) {
         Objetivo objetivo = form.converter();
-
         Objetivo objetivoSalvo = repository.save(objetivo);
 
         return new ObjetivoView(objetivoSalvo);
@@ -61,6 +58,16 @@ public class ObjetivoService {
         Objetivo objetivo = form.converter();
         objetivo.setId(id);
         repository.save(objetivo);
+    }
+
+    @Transactional
+    public void alterarStatus(ObjetivoForm form, int id) {
+        StatusEnum novoStatus = form.getStatus();
+
+        Objetivo objetivoComStatusAlterado = buscaObjetivoValidado(id);
+        objetivoComStatusAlterado.alterarStatus(novoStatus);
+
+        repository.save(objetivoComStatusAlterado);
     }
 
     @Transactional
@@ -75,6 +82,12 @@ public class ObjetivoService {
             .collect(Collectors.toList());
 
         repository.deleteInBatch(objetivos);
+    }
+
+    private Objetivo buscaObjetivoValidado(int id) {
+        Optional<Objetivo> objetivo = repository.findById(id);
+        validacaoPossuiObjetivo(objetivo.isPresent());
+        return objetivo.get();
     }
 
     private void validacaoPossuiObjetivo(boolean possuiObjetivos) {

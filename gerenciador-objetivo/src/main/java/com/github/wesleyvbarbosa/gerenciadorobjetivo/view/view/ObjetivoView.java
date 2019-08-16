@@ -1,6 +1,7 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.StatusEnum;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -15,6 +16,7 @@ public class ObjetivoView {
     private BigDecimal envolvimento;
     private BigDecimal necessidade;
     private BigDecimal urgencia;
+    private StatusEnum status;
 
     @Deprecated
     public ObjetivoView() {
@@ -29,6 +31,7 @@ public class ObjetivoView {
         this.necessidade = objetivo.getNecessidade();
         this.urgencia = objetivo.getUrgencia();
         this.id = objetivo.getId();
+        this.status = objetivo.getStatus();
     }
 
     public int getId() {
@@ -61,5 +64,9 @@ public class ObjetivoView {
 
     public BigDecimal getUrgencia() {
         return urgencia;
+    }
+
+    public StatusEnum getStatus() {
+        return status;
     }
 }
