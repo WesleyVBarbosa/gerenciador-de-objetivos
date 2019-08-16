@@ -26,6 +26,7 @@ import javax.transaction.Transactional;
 @Service
 public class EvidenciaService {
 
+    private static final String MENSAGEM_ERRO_SALVAR_EVIDENCIA = "Não foi possível salvar suas evidências!";
     private String caminhoDiretorio;
 
     private ObjetivoRepository objetivoRepository;
@@ -38,8 +39,6 @@ public class EvidenciaService {
 
     public List<EvidenciaView> consultarEvidencias(int id) {
         Objetivo objetivo = buscaObjetivoJaValidado(id);
-
-        // TODO Arrumar endpoint - por algum motivo não está trazendo as evidencias salvas no objetivo.
 
         return objetivo.getEvidencias()
             .stream()
@@ -63,7 +62,7 @@ public class EvidenciaService {
                 Evidencia evidencia = new Evidencia(objetivo, arquivoRecebido.getAbsolutePath());
                 objetivo.addEvidencia(evidencia);
             } catch (IOException | BusinessException e) {
-                throw new NaoFoiPossivelSalvarEvidenciaException("Não foi possível salvar suas evidências!", e);
+                throw new NaoFoiPossivelSalvarEvidenciaException(MENSAGEM_ERRO_SALVAR_EVIDENCIA, e);
             }
         }
 

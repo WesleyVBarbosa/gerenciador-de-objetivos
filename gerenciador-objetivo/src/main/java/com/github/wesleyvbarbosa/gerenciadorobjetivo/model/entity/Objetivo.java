@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -30,7 +31,7 @@ public class Objetivo {
     @Enumerated(value = EnumType.STRING)
     private StatusEnum status;
 
-    @OneToMany(mappedBy = "objetivo")
+    @OneToMany(mappedBy = "objetivo", cascade = CascadeType.ALL)
     private List<Evidencia> evidencias;
 
     private BigDecimal percentualConclusao;
