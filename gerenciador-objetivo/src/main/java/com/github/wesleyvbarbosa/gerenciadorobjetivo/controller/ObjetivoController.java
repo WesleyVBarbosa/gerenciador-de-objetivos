@@ -6,6 +6,7 @@ import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.viewmodel.ObjetivoView
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -44,13 +45,13 @@ public class ObjetivoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ObjetivoView salvar(@RequestBody ObjetivoForm form) {
+    public ObjetivoView salvar(@RequestBody @Validated ObjetivoForm form) {
         return service.salvar(form);
     }
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void alterar(@RequestBody ObjetivoForm form, @PathVariable int id) {
+    public void alterar(@RequestBody @Validated ObjetivoForm form, @PathVariable int id) {
         service.alterar(form, id);
     }
 

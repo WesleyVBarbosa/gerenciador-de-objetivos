@@ -23,9 +23,6 @@ public class ObjetivoForm {
     private String descricao;
 
     @NotNull
-    private List<Objetivo> objetivos;
-
-    @NotNull
     private BigDecimal percentualConclusao;
 
     @NotNull
@@ -37,6 +34,7 @@ public class ObjetivoForm {
     @NotNull
     private BigDecimal urgencia;
 
+    private List<Objetivo> objetivos;
     private StatusEnum status;
 
     @Deprecated
