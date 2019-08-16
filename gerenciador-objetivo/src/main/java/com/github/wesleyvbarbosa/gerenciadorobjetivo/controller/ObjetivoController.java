@@ -2,12 +2,14 @@ package com.github.wesleyvbarbosa.gerenciadorobjetivo.controller;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.service.ObjetivoService;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.form.ObjetivoForm;
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view.ObjetivoView;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.viewmodel.ObjetivoView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,14 +45,20 @@ public class ObjetivoController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public ObjetivoView salvar(@RequestBody ObjetivoForm form) {
+    public ObjetivoView salvar(@RequestBody @Validated ObjetivoForm form) {
         return service.salvar(form);
     }
 
     @PutMapping(path = "/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public void alterar(@RequestBody ObjetivoForm form, @PathVariable int id) {
+    public void alterar(@RequestBody @Validated ObjetivoForm form, @PathVariable int id) {
         service.alterar(form, id);
+    }
+
+    @PatchMapping(path = "/{id}")
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void alterarStatus(@RequestBody ObjetivoForm form, @PathVariable int id) {
+        service.alterarStatus(form, id);
     }
 
     @DeleteMapping(path = "/{id}")
