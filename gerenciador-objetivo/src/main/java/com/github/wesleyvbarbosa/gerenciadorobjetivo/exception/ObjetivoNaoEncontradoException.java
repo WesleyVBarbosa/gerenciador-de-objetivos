@@ -5,17 +5,4 @@ public class ObjetivoNaoEncontradoException extends BusinessException {
     public ObjetivoNaoEncontradoException() {
         super("Nenhum Objetivo encontrado!");
     }
-
-    public ObjetivoNaoEncontradoException(String message) {
-        super(message);
-    }
-
-    public ObjetivoNaoEncontradoException(Throwable cause) {
-        super(cause);
-    }
-
-    public ObjetivoNaoEncontradoException(String message, Throwable cause) {
-        super(message, cause);
-    }
-
 }

@@ -61,7 +61,7 @@ public class EvidenciaService {
                 writer.write(arquivo.getBytes());
                 Evidencia evidencia = new Evidencia(objetivo, arquivoRecebido.getAbsolutePath());
                 objetivo.addEvidencia(evidencia);
-            } catch (IOException | BusinessException e) {
+            } catch (IOException e) {
                 throw new NaoFoiPossivelSalvarEvidenciaException(MENSAGEM_ERRO_SALVAR_EVIDENCIA, e);
             }
         }

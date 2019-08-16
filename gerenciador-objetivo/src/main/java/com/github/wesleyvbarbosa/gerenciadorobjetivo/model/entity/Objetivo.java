@@ -1,5 +1,7 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity;
 
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.NaoFoiPossivelAdicionarEvidenciaException;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -62,46 +64,6 @@ public class Objetivo {
         this.urgencia = urgencia;
     }
 
-    public BigDecimal calcularPrioridade() {
-        return getPercentualConclusao()
-            .add(getEnvolvimento())
-            .add(getNecessidade())
-            .add(getUrgencia())
-            .divide(NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE);
-    }
-
-    public void addEvidencia(Evidencia evidencia) {
-        this.evidencias.add(evidencia);
-    }
-
-    public void alterarStatus(StatusEnum novoStatus) {
-        this.status = novoStatus;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public void setPercentualConclusao(BigDecimal percentualConclusao) {
-        this.percentualConclusao = percentualConclusao;
-    }
-
-    public void setEnvolvimento(BigDecimal envolvimento) {
-        this.envolvimento = envolvimento;
-    }
-
-    public void setNecessidade(BigDecimal necessidade) {
-        this.necessidade = necessidade;
-    }
-
-    public void setUrgencia(BigDecimal urgencia) {
-        this.urgencia = urgencia;
-    }
-
     public List<Evidencia> getEvidencias() {
         return Collections.unmodifiableList(evidencias);
     }
@@ -144,5 +106,33 @@ public class Objetivo {
 
     public BigDecimal getUrgencia() {
         return urgencia;
+    }
+
+    public BigDecimal calcularPrioridade() {
+        return getPercentualConclusao()
+            .add(getEnvolvimento())
+            .add(getNecessidade())
+            .add(getUrgencia())
+            .divide(NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE);
+    }
+
+    public Objetivo addEvidencia(Evidencia evidencia) {
+        if (naoEhPossivelAdicionarEvidencia()) {
+            throw new NaoFoiPossivelAdicionarEvidenciaException(this);
+        }
+        this.evidencias.add(evidencia);
+        return this;
+    }
+
+    public void alterarStatus(StatusEnum novoStatus) {
+        this.status = novoStatus;
+    }
+
+    private boolean permiteAdicionarEvidencia() {
+        return StatusEnum.permiteAdicionarEvidencia(this.getStatus());
+    }
+
+    private boolean naoEhPossivelAdicionarEvidencia() {
+        return !permiteAdicionarEvidencia();
     }
 }
