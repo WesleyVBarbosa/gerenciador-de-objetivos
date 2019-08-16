@@ -28,7 +28,7 @@ public class Objetivo {
     private String titulo;
     private String descricao;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Objetivo> objetivos;
 
     @Enumerated(value = EnumType.STRING)
