@@ -17,6 +17,7 @@ public class ObjetivoView {
     private BigDecimal necessidade;
     private BigDecimal urgencia;
     private StatusEnum status;
+    private BigDecimal prioridade;
 
     @Deprecated
     public ObjetivoView() {
@@ -32,6 +33,11 @@ public class ObjetivoView {
         this.urgencia = objetivo.getUrgencia();
         this.id = objetivo.getId();
         this.status = objetivo.getStatus();
+        this.prioridade = objetivo.calcularPrioridade();
+    }
+
+    public BigDecimal getPrioridade() {
+        return prioridade;
     }
 
     public int getId() {

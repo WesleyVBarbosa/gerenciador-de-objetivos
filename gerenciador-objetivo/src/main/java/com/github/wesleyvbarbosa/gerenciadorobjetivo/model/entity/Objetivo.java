@@ -19,6 +19,7 @@ import javax.persistence.OneToMany;
 public class Objetivo {
 
     private static final BigDecimal NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE = new BigDecimal(4);
+    private static final int SCALE = 2;
 
     @Id
     @GeneratedValue
@@ -56,12 +57,13 @@ public class Objetivo {
         this.titulo = titulo;
         this.descricao = descricao;
         this.objetivos = objetivos;
-        this.status = StatusEnum.EM_ANDAMENTO;
-        this.evidencias = new ArrayList<>();
         this.percentualConclusao = percentualConclusao;
         this.envolvimento = envolvimento;
         this.necessidade = necessidade;
         this.urgencia = urgencia;
+
+        this.status = StatusEnum.EM_ANDAMENTO;
+        this.evidencias = new ArrayList<>();
     }
 
     public List<Evidencia> getEvidencias() {
@@ -113,7 +115,7 @@ public class Objetivo {
             .add(getEnvolvimento())
             .add(getNecessidade())
             .add(getUrgencia())
-            .divide(NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE);
+            .divide(NUMERO_CAMPOS_PARA_CALCULO_MEDIA_PRIORIDADE, SCALE, BigDecimal.ROUND_HALF_UP);
     }
 
     public Objetivo addEvidencia(Evidencia evidencia) {
