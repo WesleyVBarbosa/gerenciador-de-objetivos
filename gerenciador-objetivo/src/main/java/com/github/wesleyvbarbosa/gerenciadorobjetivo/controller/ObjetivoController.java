@@ -2,7 +2,7 @@ package com.github.wesleyvbarbosa.gerenciadorobjetivo.controller;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.service.ObjetivoService;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.form.ObjetivoForm;
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view.ObjetivoView;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.viewmodel.ObjetivoView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

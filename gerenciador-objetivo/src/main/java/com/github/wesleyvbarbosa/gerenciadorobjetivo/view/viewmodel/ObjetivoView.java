@@ -1,4 +1,4 @@
-package com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view;
+package com.github.wesleyvbarbosa.gerenciadorobjetivo.view.viewmodel;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.StatusEnum;

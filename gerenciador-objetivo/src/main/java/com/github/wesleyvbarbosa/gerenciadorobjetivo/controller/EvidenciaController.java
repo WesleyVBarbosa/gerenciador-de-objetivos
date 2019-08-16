@@ -1,7 +1,7 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.controller;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.service.EvidenciaService;
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view.EvidenciaView;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.viewmodel.EvidenciaView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

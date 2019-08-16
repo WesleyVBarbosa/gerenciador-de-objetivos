@@ -9,15 +9,34 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Stream;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class ObjetivoForm {
 
+    @NotNull
+    @NotEmpty
     private String titulo;
+
+    @NotNull
+    @NotEmpty
     private String descricao;
+
+    @NotNull
     private List<Objetivo> objetivos;
+
+    @NotNull
     private BigDecimal percentualConclusao;
+
+    @NotNull
     private BigDecimal envolvimento;
+
+    @NotNull
     private BigDecimal necessidade;
+
+    @NotNull
     private BigDecimal urgencia;
+
     private StatusEnum status;
 
     @Deprecated
@@ -33,6 +52,18 @@ public class ObjetivoForm {
                             getEnvolvimento(),
                             getNecessidade(),
                             getUrgencia());
+    }
+
+    public Objetivo atualizarObjetivo(Objetivo objetivo) {
+        objetivo.setTitulo(this.getTitulo());
+        objetivo.setDescricao(this.getDescricao());
+        objetivo.setObjetivos(this.getObjetivos());
+        objetivo.setEnvolvimento(this.getEnvolvimento());
+        objetivo.setNecessidade(this.getNecessidade());
+        objetivo.setPercentualConclusao(this.getPercentualConclusao());
+        objetivo.setUrgencia(this.getUrgencia());
+
+        return objetivo;
     }
 
     private void validaSeCamposObrigatoriosEstaoPreenchidos() {

@@ -3,9 +3,9 @@ package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.service;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.ObjetivoNaoEncontradoException;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.StatusEnum;
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.repository.ObjetivoRepository;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.repository.ObjetivoRepository;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.form.ObjetivoForm;
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view.ObjetivoView;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.viewmodel.ObjetivoView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,9 +55,9 @@ public class ObjetivoService {
 
     @Transactional
     public void alterar(ObjetivoForm form, int id) {
-        Objetivo objetivo = form.converter();
-        objetivo.setId(id);
-        repository.save(objetivo);
+        Objetivo objetivo = buscaObjetivoValidado(id);
+        Objetivo objetivoAtualizado = form.atualizarObjetivo(objetivo);
+        repository.save(objetivoAtualizado);
     }
 
     @Transactional

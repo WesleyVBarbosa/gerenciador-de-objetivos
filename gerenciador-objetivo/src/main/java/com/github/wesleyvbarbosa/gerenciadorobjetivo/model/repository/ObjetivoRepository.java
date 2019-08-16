@@ -1,4 +1,4 @@
-package com.github.wesleyvbarbosa.gerenciadorobjetivo.repository;
+package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.repository;
 
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
 

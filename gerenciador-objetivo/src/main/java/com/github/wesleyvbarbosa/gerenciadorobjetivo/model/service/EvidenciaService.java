@@ -1,12 +1,11 @@
 package com.github.wesleyvbarbosa.gerenciadorobjetivo.model.service;
 
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.BusinessException;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.NaoFoiPossivelSalvarEvidenciaException;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.exception.ObjetivoNaoEncontradoException;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Evidencia;
 import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.entity.Objetivo;
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.repository.ObjetivoRepository;
-import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.view.EvidenciaView;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.model.repository.ObjetivoRepository;
+import com.github.wesleyvbarbosa.gerenciadorobjetivo.view.viewmodel.EvidenciaView;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;

@@ -66,12 +66,36 @@ public class Objetivo {
         this.evidencias = new ArrayList<>();
     }
 
-    public List<Evidencia> getEvidencias() {
-        return Collections.unmodifiableList(evidencias);
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setObjetivos(List<Objetivo> objetivos) {
+        this.objetivos = objetivos;
+    }
+
+    public void setPercentualConclusao(BigDecimal percentualConclusao) {
+        this.percentualConclusao = percentualConclusao;
+    }
+
+    public void setEnvolvimento(BigDecimal envolvimento) {
+        this.envolvimento = envolvimento;
+    }
+
+    public void setNecessidade(BigDecimal necessidade) {
+        this.necessidade = necessidade;
+    }
+
+    public void setUrgencia(BigDecimal urgencia) {
+        this.urgencia = urgencia;
+    }
+
+    public List<Evidencia> getEvidencias() {
+        return Collections.unmodifiableList(evidencias);
     }
 
     public StatusEnum getStatus() {
